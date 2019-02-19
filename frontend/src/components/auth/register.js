@@ -19,23 +19,23 @@ export const Register = () => {
         event.preventDefault();
 
         const { username, password, confirmPassword } = fields
-        let res = {}
+        let errors = ''
         
-        res.username = username
-        res.password = password
-        res.confirmPassword = confirmPassword
-        res.message = ''
-
         if (!username) {
-            res.message = res.message + 'USERNAME REQUIRED '
+            errors += 'USERNAME REQUIRED\n'
         }
         if (!password) {
-            res.message = res.message + 'PASSWORD REQUIRED'
+            errors += 'PASSWORD REQUIRED'
         }
         if (password !== confirmPassword) {
-            res.message = res.message + 'PASSWORDS DO NOT MATCH'
+            errors += 'PASSWORDS MUST MATCH'
         }
-        setField(res)
+        setField({
+            username: '',
+            password: '',
+            confirmPassword: '',
+            message: errors
+        })
         console.log(JSON.stringify(fields, null, 5))
     }
 
