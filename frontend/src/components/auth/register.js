@@ -22,7 +22,7 @@ export const Register = () => {
         let errors = ''
         
         if (!username) {
-            errors += 'USERNAME REQUIRED\n'
+            errors += 'USERNAME REQUIRED'
         }
         if (!password) {
             errors += 'PASSWORD REQUIRED'
