@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { REGISTER } from '../../redux/types/authTypes';
+import { connect } from 'react-redux';
 
-export const Register = () => {
+const Register = () => {
     const [fields, setField] = useState({
         username: '',
         password: '',
@@ -69,3 +71,20 @@ export const Register = () => {
         </div>
     )
 }
+
+
+const mapStateToProps = state => {
+    return {
+        loggedIn: state.auth.loggedIn,
+        currentUser: state.auth.currentUser,
+        error: state.auth.error
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        register: (username, password) => dispatch(REGISTER(username, password))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register)

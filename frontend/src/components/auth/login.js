@@ -1,8 +1,11 @@
 import React, {
     useState
 } from 'react'
+import { connect } from 'react-redux'
+import { LOGIN } from '../../redux/actions/authActions'
 
-export const Login = () => {
+
+const Login = () => {
     const [fields, setField] = useState({
         username: '',
         password: ''
@@ -17,7 +20,10 @@ export const Login = () => {
 
     const handleSubmit = event => {
         event.preventDefault();
-        console.log(JSON.stringify(fields, null, 5))
+        const { username, password } = fields
+
+        this.props.login(username, password)
+
         setField({
             username: '',
             password: ''
@@ -47,3 +53,19 @@ export const Login = () => {
         </div>
     )
 }
+
+const mapStateToProps = state => {
+    return {
+        loggedIn: state.auth.loggedIn,
+        currentUser: state.auth.currentUser,
+        error: state.auth.error
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        login: (username, password) => dispatch(LOGIN(username, password))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login)
