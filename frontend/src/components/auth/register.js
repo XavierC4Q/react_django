@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { REGISTER } from '../../redux/types/authTypes';
+import { REGISTER_ACTION } from '../../redux/actions/authActions';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-const Register = () => {
+const Register = ({ registerUser, loggedIn, error }) => {
     const [fields, setField] = useState({
         username: '',
         password: '',
-        confirmPassword: '',
-        message: ''
+        confirmPassword: ''
     })
 
     const handleInput = event => {
@@ -21,24 +21,18 @@ const Register = () => {
         event.preventDefault();
 
         const { username, password, confirmPassword } = fields
-        let errors = ''
         
-        if (!username) {
-            errors += 'USERNAME REQUIRED'
-        }
-        if (!password) {
-            errors += 'PASSWORD REQUIRED'
-        }
-        if (password !== confirmPassword) {
-            errors += 'PASSWORDS MUST MATCH'
-        }
         setField({
             username: '',
             password: '',
-            confirmPassword: '',
-            message: errors
+            confirmPassword: ''
         })
-        console.log(JSON.stringify(fields, null, 5))
+        
+        registerUser(username, password, confirmPassword)
+    }
+
+    if (loggedIn) {
+        return (<Redirect to='/' />)
     }
 
     return (
@@ -68,6 +62,9 @@ const Register = () => {
                 />
                 <button type='submit'>Submit</button>
             </form>
+            <div>
+                {error}
+            </div>
         </div>
     )
 }
@@ -75,15 +72,14 @@ const Register = () => {
 
 const mapStateToProps = state => {
     return {
-        loggedIn: state.auth.loggedIn,
-        currentUser: state.auth.currentUser,
-        error: state.auth.error
+        loggedIn: state.authReducer.loggedIn,
+        error: state.authReducer.error
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        register: (username, password) => dispatch(REGISTER(username, password))
+        registerUser: (username, password, confirmPassword) => dispatch(REGISTER_ACTION(username, password, confirmPassword))
     }
 }
 

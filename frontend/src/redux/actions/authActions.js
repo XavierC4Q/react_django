@@ -5,6 +5,8 @@ import {
     AUTH_ERROR
 } from '../types/authTypes'
 
+import axios from 'axios'
+
 const userAuthError = error => {
     return {
         type: AUTH_ERROR,
@@ -18,10 +20,19 @@ const loginUser = user => {
         payload: user
     }
 }
-export const LOGIN = (username, password) => {
+export const LOGIN_ACTION = (username, password) => {
     return async dispatch => {
         try {
-            // DO API REQUEST USING USERNAME AND PASSWORD
+            const doLogin = await axios.post('/auth/login/', {
+                username,
+                password
+            })
+
+            localStorage.setItem('auth_token', doLogin.data.key)
+
+            const getLoggedInUser = await axios.get('/auth/user/')
+
+            dispatch(loginUser(getLoggedInUser.data))
         } catch {
             dispatch(userAuthError('Wrong username/password'))
         }
@@ -35,12 +46,22 @@ const registerUser = user => {
     }
 }
 
-export const REGISTER = (username, password) => {
+export const REGISTER_ACTION = (username, password, confirmPassword) => {
     return async dispatch => {
         try {
-            // API REQUEST TO REGISTER USER
+            const doRegister = await axios.post('/auth/signup/', {
+                username,
+                password1: password,
+                password2: confirmPassword
+            })
+
+            localStorage.setItem('auth_token', doRegister.data.key)
+
+            const getLoggedInUser = await axios.get('/auth/user/')
+
+            dispatch(registerUser(getLoggedInUser.data))
         } catch {
-            dispatch(userAuthError('Username is taken'))
+            dispatch(userAuthError('Username is taken/passwords do not match'))
         }
     }
 }
@@ -51,8 +72,10 @@ const logoutUser = () => {
     }
 }
 
-export const LOGOUT = () => {
+export const LOGOUT_ACTION = () => {
     return async dispatch => {
-        // API REQUEST TO LOGOUT USER AKA REMOVE USER TOKEN
-    } 
+        await axios.post('/auth/logout/')
+        dispatch(logoutUser())
+        return null
+    }
 }

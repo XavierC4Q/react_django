@@ -2,10 +2,11 @@ import React, {
     useState
 } from 'react'
 import { connect } from 'react-redux'
-import { LOGIN } from '../../redux/actions/authActions'
+import { Redirect } from 'react-router-dom'
+import { LOGIN_ACTION } from '../../redux/actions/authActions'
 
 
-const Login = () => {
+const Login = ({ login, currentUser, error, loggedIn }) => {
     const [fields, setField] = useState({
         username: '',
         password: ''
@@ -22,14 +23,16 @@ const Login = () => {
         event.preventDefault();
         const { username, password } = fields
 
-        this.props.login(username, password)
+        login(username, password)
 
         setField({
             username: '',
             password: ''
         })
     }
-
+    if (loggedIn) {
+        return (<Redirect to='/' />)
+    }
     return (
         <div>
             <h1>Login Form</h1>
@@ -49,6 +52,9 @@ const Login = () => {
                     placeholder='Enter password'
                 />
                 <button type='submit'>Submit</button>
+                <div>
+                    {error}
+                </div>
             </form>
         </div>
     )
@@ -56,15 +62,14 @@ const Login = () => {
 
 const mapStateToProps = state => {
     return {
-        loggedIn: state.auth.loggedIn,
-        currentUser: state.auth.currentUser,
-        error: state.auth.error
+        loggedIn: state.authReducer.loggedIn,
+        error: state.authReducer.error
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        login: (username, password) => dispatch(LOGIN(username, password))
+        login: (username, password) => dispatch(LOGIN_ACTION(username, password))
     }
 }
 

@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom'
 import Login from './components/auth/login'
 import Register from './components/auth/register'
 import { Home } from './components/home'
-import { Header } from './components/header'
+import Header from './components/header'
 
 
 class App extends Component {
