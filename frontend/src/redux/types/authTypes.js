@@ -2,11 +2,13 @@ const LOGIN = 'LOGIN'
 const REGISTER = 'REGISTER'
 const LOGOUT = 'LOGOUT'
 const AUTH_ERROR = 'AUTH_ERROR'
+const EDIT_USER = 'EDIT_USER'
 
 
 export {
     LOGIN,
     REGISTER,
     LOGOUT,
-    AUTH_ERROR
+    AUTH_ERROR,
+    EDIT_USER
 }
