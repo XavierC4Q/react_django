@@ -16,8 +16,17 @@ export const Header = ({ loggedIn, currentUser, logout }) => {
             </div>
         )
     }
+    
+    const profileUrl = `/profile/${currentUser.pk}`
+
     return (<div>
+        <nav>
+        <Link to='/'>Home</Link>
+                {" "}
+        <Link to={profileUrl}>Profile</Link>
+        {" "}
         <button onClick={logout}>Logout Here</button>
+        </nav>
     </div>)
 }
 

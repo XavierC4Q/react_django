@@ -2,7 +2,8 @@ import {
     LOGIN,
     LOGOUT,
     REGISTER,
-    AUTH_ERROR
+    AUTH_ERROR,
+    GET_LOGGED_IN_USER
 } from '../types/authTypes'
 
 import axios from 'axios'
@@ -39,6 +40,8 @@ export const LOGIN_ACTION = (username, password) => {
     }
 }
 
+
+
 const registerUser = user => {
     return {
         type: REGISTER,
@@ -66,6 +69,8 @@ export const REGISTER_ACTION = (username, password, confirmPassword) => {
     }
 }
 
+
+
 const logoutUser = () => {
     return {
         type: LOGOUT
@@ -77,5 +82,25 @@ export const LOGOUT_ACTION = () => {
         await axios.post('/auth/logout/')
         dispatch(logoutUser())
         return null
+    }
+}
+
+
+const getLoggedInUser = user => {
+    return {
+        type: GET_LOGGED_IN_USER,
+        payload: user
+    }
+}
+
+export const LOGGED_IN_USER_ACTION = () => {
+    return async dispatch => {
+        try {
+            const loggedInUser = await axios.get('/auth/user/')
+            
+            return dispatch(getLoggedInUser(loggedInUser.data))
+        } catch {
+            dispatch(userAuthError('Could not retrieve logged in user'))
+        }
     }
 }

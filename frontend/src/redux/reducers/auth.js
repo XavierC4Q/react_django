@@ -3,7 +3,8 @@ import {
     REGISTER,
     LOGOUT,
     AUTH_ERROR,
-    EDIT_USER
+    EDIT_USER,
+    GET_LOGGED_IN_USER
 } from '../types/authTypes'
 
 export default (state = {
@@ -24,6 +25,12 @@ export default (state = {
                 error: ''
             }
         case REGISTER:
+            return {
+                currentUser: payload,
+                loggedIn: true,
+                error: ''
+            }
+        case GET_LOGGED_IN_USER:
             return {
                 currentUser: payload,
                 loggedIn: true,
