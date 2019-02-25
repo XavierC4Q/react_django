@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'allauth',
     'allauth.account',
-    'rest_auth.registration'
+    'rest_auth.registration',
+    'django_filters'
 ]
 
 MIDDLEWARE = [
@@ -106,7 +107,8 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
-    )
+    ),
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',)
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

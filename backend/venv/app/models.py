@@ -9,7 +9,7 @@ class MyUser(AbstractUser):
         return 'Username: {username}'.format(username=self.username)
 
 class Mood(models.Model):
-    user_id = models.ForeignKey('MyUser', related_name='user_id', on_delete=models.CASCADE)
+    user_id = models.ForeignKey(MyUser, related_name='user_id', on_delete=models.CASCADE)
     title = models.CharField(max_length=50, default='')
     primary_mood = models.CharField(max_length=50, blank=True, null=True)
     secondary_mood = models.CharField(max_length=50, blank=True, null=True)
