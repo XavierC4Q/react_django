@@ -1,0 +1,9 @@
+const POST_MOOD = 'POST_MOOD'
+const GET_USER_MOODS = 'GET_USER_MOODS'
+const USER_ERROR = 'USER_ERROR'
+
+export {
+    POST_MOOD,
+    GET_USER_MOODS,
+    USER_ERROR
+}
