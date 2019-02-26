@@ -10,6 +10,6 @@ export default ({ dispatch, getState }) => next => action => {
 
     Object.keys(state).forEach(key => {
         console.log(`----- ${key.toUpperCase()}`)
-        console.table(state[key])
+        console.log(state[key])
     })
 }
