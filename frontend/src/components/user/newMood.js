@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 
 
-const NewMood = ({ id, owner, currentUser, addNewEntry, loggedIn }) => {
+const NewMood = ({ id, owner, currentUser, addNewEntry }) => {
 
     const initialState = {
         title: '',
@@ -22,20 +22,15 @@ const NewMood = ({ id, owner, currentUser, addNewEntry, loggedIn }) => {
 
     const handleMoodEntry = event => {
         event.preventDefault();
-        const moodInfo = {
-            ...fields,
-            user_id: Number(id)
-        }
+        const moodInfo = {...fields, user_id: Number(id)}
         addNewEntry(moodInfo)
         setField(initialState)
     }
     
     if (owner && currentUser) {
-        if (Number(id) !== currentUser.pk) {
-            return (<Redirect to='/' />)
-        } 
         return (
             <div>
+                <h1>Your Next Entry</h1>
                 <form onSubmit={handleMoodEntry}>
                     <input 
                         name='title'

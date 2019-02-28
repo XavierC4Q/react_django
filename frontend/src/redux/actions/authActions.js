@@ -3,7 +3,8 @@ import {
     LOGOUT,
     REGISTER,
     AUTH_ERROR,
-    GET_LOGGED_IN_USER
+    GET_LOGGED_IN_USER,
+    EDIT_USER
 } from '../types/authTypes'
 
 import axios from 'axios'
@@ -79,6 +80,21 @@ export const LOGGED_IN_USER_ACTION = () => {
             })
         } catch {
             dispatch(userAuthError('Could not retrieve logged in user'))
+        }
+    }
+}
+
+export const EDIT_USER_ACTION = (id, userChanges) => {
+    return async dispatch => {
+        try {
+            const updatedUser = await axios.put(`/api/users/${id}`, userChanges)
+
+            dispatch({
+                type: EDIT_USER,
+                payload: updatedUser.data
+            })
+        } catch (err) {
+            dispatch(userAuthError('Failed to updated user'))
         }
     }
 }

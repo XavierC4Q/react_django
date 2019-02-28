@@ -5,8 +5,9 @@ import {
 import {
     GET_ALL_USER_MOODS_ACTION,
     GET_PROFILE_USER_ACTION,
-    ADD_NEW_MOOD_ENTRY
+    ADD_NEW_MOOD_ACTION,
 } from '../../redux/actions/userActions'
+import { EDIT_USER_ACTION } from '../../redux/actions/authActions';
 import { Route, Link, withRouter } from 'react-router-dom';
 
 import MoodList from './moodList';
@@ -14,7 +15,18 @@ import NewMood from './newMood';
 import EditUser from './edit';
 
 
-const Profile = ({ id, currentUser, profileUser, loggedIn, moods, userError, getAllMoods, getProfileUser, addMood }) => {
+const Profile = ({ 
+    id, 
+    currentUser, 
+    profileUser, 
+    loggedIn, 
+    moods, 
+    userError, 
+    getAllMoods, 
+    getProfileUser, 
+    addMood, 
+    editUser }) => {
+
     useEffect(() => {
         getProfileUser(id)
         getAllMoods(id)
@@ -41,8 +53,18 @@ const Profile = ({ id, currentUser, profileUser, loggedIn, moods, userError, get
                 id={id}
                 owner={profileUser}
                 currentUser={currentUser}
-                loggedIn={loggedIn}
                 addNewEntry={addMood}
+                />
+        )
+    }
+
+    const renderUserEdit = () => {
+        return (
+            <EditUser
+                edit={editUser}
+                id={id}
+                owner={profileUser}
+                currentUser={currentUser}
                 />
         )
     }
@@ -57,7 +79,7 @@ const Profile = ({ id, currentUser, profileUser, loggedIn, moods, userError, get
             {" "}
         </nav>
         <Route path='/profile/:id/new' render={renderNewMoodPage} />
-        <Route path='/profile/:id/edit' component={EditUser} />
+        <Route path='/profile/:id/edit' render={renderUserEdit} />
         <Route exact path='/profile/:id' render={renderMoodList} />
     </div>);
 }
@@ -76,7 +98,8 @@ const mapDispatchToProps = dispatch => {
     return {
         getAllMoods: user_id => dispatch(GET_ALL_USER_MOODS_ACTION(user_id)),
         getProfileUser: id => dispatch(GET_PROFILE_USER_ACTION(id)),
-        addMood: moodInfo => dispatch(ADD_NEW_MOOD_ENTRY(moodInfo))
+        addMood: moodInfo => dispatch(ADD_NEW_MOOD_ACTION(moodInfo)),
+        editUser: (id, userChanges) => dispatch(EDIT_USER_ACTION(id, userChanges))
     }
 }
 

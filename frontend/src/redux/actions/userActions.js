@@ -44,7 +44,7 @@ export const GET_ALL_USER_MOODS_ACTION = user_id => {
     }
 }
 
-export const ADD_NEW_MOOD_ENTRY = moodInfo => {
+export const ADD_NEW_MOOD_ACTION = moodInfo => {
     return async dispatch => {
         try {
             const addMood = await axios.post('/api/moods/', moodInfo)
