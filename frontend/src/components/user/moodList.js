@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 const header = (owner, currentUser, id) => {
     if (owner && currentUser && Number(id) !== currentUser.pk) {

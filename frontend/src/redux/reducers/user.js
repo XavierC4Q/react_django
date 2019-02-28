@@ -20,6 +20,7 @@ export default (state = {
             }
         case GET_USER_MOODS:
             return {
+                ...state,
                 errors: '',
                 moods: payload
             }

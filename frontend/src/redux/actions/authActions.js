@@ -15,12 +15,6 @@ const userAuthError = error => {
     }
 }
 
-const loginUser = user => {
-    return {
-        type: LOGIN,
-        payload: user
-    }
-}
 export const LOGIN_ACTION = (username, password) => {
     return async dispatch => {
         try {
@@ -33,19 +27,13 @@ export const LOGIN_ACTION = (username, password) => {
 
             const getLoggedInUser = await axios.get('/auth/user/')
 
-            dispatch(loginUser(getLoggedInUser.data))
+            dispatch({
+                type: LOGIN,
+                payload: getLoggedInUser.data
+            })
         } catch {
             dispatch(userAuthError('Wrong username/password'))
         }
-    }
-}
-
-
-
-const registerUser = user => {
-    return {
-        type: REGISTER,
-        payload: user
     }
 }
 
@@ -60,36 +48,23 @@ export const REGISTER_ACTION = (username, password, confirmPassword) => {
 
             localStorage.setItem('auth_token', doRegister.data.key)
 
-            const getLoggedInUser = await axios.get('/auth/user/')
+            const getNewUser = await axios.get('/auth/user/')
 
-            dispatch(registerUser(getLoggedInUser.data))
+            dispatch({
+                type: REGISTER,
+                payload: getNewUser.data
+            })
         } catch {
             dispatch(userAuthError('Username is taken/passwords do not match'))
         }
     }
 }
 
-
-
-const logoutUser = () => {
-    return {
-        type: LOGOUT
-    }
-}
-
 export const LOGOUT_ACTION = () => {
     return async dispatch => {
         await axios.post('/auth/logout/')
-        dispatch(logoutUser())
+        dispatch({ type: LOGOUT })
         return null
-    }
-}
-
-
-const getLoggedInUser = user => {
-    return {
-        type: GET_LOGGED_IN_USER,
-        payload: user
     }
 }
 
@@ -98,7 +73,10 @@ export const LOGGED_IN_USER_ACTION = () => {
         try {
             const loggedInUser = await axios.get('/auth/user/')
             
-            return dispatch(getLoggedInUser(loggedInUser.data))
+            return dispatch({
+                type: GET_LOGGED_IN_USER,
+                payload: loggedInUser.data
+            })
         } catch {
             dispatch(userAuthError('Could not retrieve logged in user'))
         }

@@ -4,7 +4,8 @@ import {
 } from 'react-redux'
 import {
     GET_ALL_USER_MOODS_ACTION,
-    GET_PROFILE_USER_ACTION
+    GET_PROFILE_USER_ACTION,
+    ADD_NEW_MOOD_ENTRY
 } from '../../redux/actions/userActions'
 import { Route, Link, withRouter } from 'react-router-dom';
 
@@ -13,22 +14,37 @@ import NewMood from './newMood';
 import EditUser from './edit';
 
 
-const Profile = ({ id, currentUser, profileUser, loggedIn, moods, userError, getAllMoods, getProfileUser }) => {
+const Profile = ({ id, currentUser, profileUser, loggedIn, moods, userError, getAllMoods, getProfileUser, addMood }) => {
     useEffect(() => {
         getProfileUser(id)
         getAllMoods(id)
-    }, [])
+    }, [id])
 
     const newMoodUrl = `/profile/${id}/new`
     const mainProfileUrl = `/profile/${id}`
     const editUserUrl = `/profile/${id}/edit`
 
     const renderMoodList = () => {
-        return (<MoodList 
+        return (
+        <MoodList 
+            id={id}
+            moods={moods} 
+            owner={profileUser} 
+            currentUser={currentUser} 
+            />
+        )
+    }
+
+    const renderNewMoodPage = () => {
+        return (
+            <NewMood
                 id={id}
-                moods={moods} 
-                owner={profileUser} 
-                currentUser={currentUser} />)
+                owner={profileUser}
+                currentUser={currentUser}
+                loggedIn={loggedIn}
+                addNewEntry={addMood}
+                />
+        )
     }
 
     return (<div>
@@ -40,7 +56,7 @@ const Profile = ({ id, currentUser, profileUser, loggedIn, moods, userError, get
             <Link to={editUserUrl}>Edit User</Link>
             {" "}
         </nav>
-        <Route path='/profile/:id/new' component={NewMood} />
+        <Route path='/profile/:id/new' render={renderNewMoodPage} />
         <Route path='/profile/:id/edit' component={EditUser} />
         <Route exact path='/profile/:id' render={renderMoodList} />
     </div>);
@@ -59,7 +75,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         getAllMoods: user_id => dispatch(GET_ALL_USER_MOODS_ACTION(user_id)),
-        getProfileUser: id => dispatch(GET_PROFILE_USER_ACTION(id))
+        getProfileUser: id => dispatch(GET_PROFILE_USER_ACTION(id)),
+        addMood: moodInfo => dispatch(ADD_NEW_MOOD_ENTRY(moodInfo))
     }
 }
 
