@@ -30,7 +30,7 @@ const Profile = ({
     useEffect(() => {
         getProfileUser(id)
         getAllMoods(id)
-    }, [id])
+    }, [id, currentUser])
 
     const newMoodUrl = `/profile/${id}/new`
     const mainProfileUrl = `/profile/${id}`

@@ -19,7 +19,12 @@ const EditUser = ({ id, owner, currentUser, edit }) => {
 
     const handleSubmission = event => {
         event.preventDefault();
-        const userChanges = {...fields, id: Number(id)}
+        const userChanges = {
+            ...fields,
+            username: fields.username ? fields.username : owner.username,
+            state: fields.state ? fields.state : owner.state
+        }
+        
         edit(id, userChanges)
         setField(initialState)
     }
@@ -32,6 +37,26 @@ const EditUser = ({ id, owner, currentUser, edit }) => {
                     <input 
                         name='username'
                         placeholder='Change your username'
+                        value={fields.username}
+                        onChange={handleInput}
+                        />
+                    <input 
+                        name='email'
+                        placeholder='Change your email'
+                        value={fields.email}
+                        onChange={handleInput}
+                        />
+                    <input 
+                        name='state'
+                        placeholder='Change your state'
+                        value={fields.state}
+                        onChange={handleInput}
+                        />
+                    <input 
+                        name='name'
+                        placeholder='Change your name'
+                        value={fields.name}
+                        onChange={handleInput}
                         />
                     <button type='submit'>Submit</button>
                 </form>
