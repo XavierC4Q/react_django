@@ -1,0 +1,48 @@
+.navbar-container {
+    height: 5%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    border-bottom: 1.5px solid black;
+}
+
+.navbar {
+    display: flex;
+    align-self: center;
+    width: 40%;
+    flex-direction: row;
+    justify-content: space-evenly
+}
+
+.nav-link {
+    text-decoration: none;
+    font-size: 150%;
+    letter-spacing: 0.15em;
+    font-weight: bolder;
+}
+
+.nav-link:visited, .navbar-link:active {
+    color: black;
+}
+
+.logout {
+    font-size: 150%;
+    letter-spacing: 0.15em;
+    text-align: center;
+    font-weight: bolder;
+}
+
+.title-container {
+    margin: 0;
+    display: flex;
+    width: 60%;
+    flex-direction: row;
+}
+
+.title {
+    margin: 0;
+    align-self: center;
+    font-size: 220%;
+    font-family: 'Amiko', sans-serif;
+}
