@@ -7,20 +7,8 @@ import './navbar.css'
 
 const authLinks = () => {
     const urlPaths = [
-        { path: '/', name: 'Home' },
         { path: '/login', name: 'Login' },
-        { path: '/register', name: 'Register' }
-    ]
-
-    return urlPaths.map(url => (
-        <Link className='nav-link' to={url.path}>{url.name}</Link>
-    ))
-}
-
-const loggedInLinks = (currentUser) => {
-    const urlPaths = [
-        { path: '/', name: 'Home' },
-        { path: `/profile/${currentUser.pk}`, name: 'My Profile' }
+        { path: '/register', name: 'Join' }
     ]
 
     return urlPaths.map(url => (
@@ -32,12 +20,12 @@ export const Navbar = ({ loggedIn, currentUser, logout }) => {
     return (
         <div className='navbar-container'>
             <div className='title-container'>
-                <p className='title'>
+                <Link to='/' className='title'>
                 MOODS
-                </p>
+                </Link>
             </div>
             <nav className='navbar'>
-                {loggedIn ? loggedInLinks(currentUser) : authLinks()}
+                {!loggedIn ? authLinks() : null}
                 {loggedIn && <span className='logout' onClick={logout}>Logout</span>}
             </nav>
         </div>
