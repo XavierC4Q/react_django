@@ -1,0 +1,125 @@
+.home-wrap {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: 1.5px solid black;
+}
+
+.top-row, .bottom-row {
+    width: 100%;
+    height: 10%;
+    margin: 0;
+    padding: 0;
+}
+
+.black-box-left {
+    height: 100%;
+    width: 10%;
+    margin: 0;
+    background-color: black;
+    float: left;
+}
+
+.black-box-right {
+    height: 100%;
+    width: 10%;
+    margin: 0;
+    background-color: black;
+    float: right;
+}
+
+.red-orange-row, .yellow-purple-row {
+    height: 100%;
+    width: 80%;
+    margin: 0;
+    padding: 0;
+    float: left;
+}
+
+.red {
+    width: 50%;
+    height: 100%;
+    background-color: red;
+    margin: 0;
+    float: left;
+}
+
+.orange {
+    width: 50%;
+    height: 100%;
+    background-color: orange;
+    margin: 0;
+    float: right;
+}
+
+.left-column, .right-column {
+    height: 80%;
+    width: 10%;
+    margin: 0;
+    float: left;
+}
+
+.dark-green {
+    height: 50%;
+    width: 100%;
+    margin: 0;
+    float: left;
+    background-color: #1E441E
+}
+
+.light-green {
+    height: 50%;
+    width: 100%;
+    margin: 0;
+    float: left;
+    background-color: #0BFE46
+}
+
+.content {
+    width: 80%;
+    height: 80%;
+    margin: 0;
+    float: left;
+    text-align: center;
+    font-size: 145%;
+}
+
+.light-blue {
+    width: 100%;
+    height: 50%;
+    margin: 0;
+    float: left;
+    background-color: #17CCF4;
+}
+
+.dark-blue {
+    width: 100%;
+    height: 50%;
+    margin: 0;
+    float: left;
+    background-color: blue;
+}
+
+
+.yellow {
+    width: 50%;
+    height: 100%;
+    background-color: yellow;
+    margin: 0;
+    float: left;
+}
+
+.purple {
+    width: 50%;
+    height: 100%;
+    background-color: purple;
+    margin: 0;
+    float: left;
+}
+
+
+
+
+
+

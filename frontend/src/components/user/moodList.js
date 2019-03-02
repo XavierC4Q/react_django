@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { Redirect } from 'react-router-dom'
 
 const header = (owner, currentUser, id) => {
     if (owner && currentUser && Number(id) !== currentUser.pk) {
@@ -23,6 +24,9 @@ const moodEntries = (moods, owner, currentUser) => {
 }
 
 const MoodList = ({ id, moods, currentUser, owner }) => {
+    if (!currentUser) {
+        return <Redirect to='/' />
+    }
     return (<div>
         {header(owner, currentUser, id)}
         {moods.length !== 0 && moodEntries(moods, owner, currentUser)}
