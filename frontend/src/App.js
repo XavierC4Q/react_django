@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux'
-import { Route, withRouter } from 'react-router-dom'
+import { Route, withRouter, Redirect } from 'react-router-dom'
 
 import Login from './components/auth/login'
 import Register from './components/auth/register'
-import { Home } from './components/home'
+import Home from './components/home/home'
 import Navbar from './components/navbar/navbar'
 import Profile from './components/user/profile'
 
@@ -13,7 +13,7 @@ import { LOGGED_IN_USER_ACTION } from './redux/actions/authActions';
 import './App.css'
 
 
-const App = ({ currentUser, loggedIn, getLoggedInUser }) => {
+const App = ({ currentUser, getLoggedInUser }) => {
 
   useEffect(() => {
     getLoggedInUser()
@@ -24,6 +24,14 @@ const App = ({ currentUser, loggedIn, getLoggedInUser }) => {
         <Navbar />
         <Route path='/profile/:id' render={props => {
           const { id } = props.match.params
+
+          if (currentUser) {
+            if(currentUser.pk !== Number(id)){
+              return <Redirect to='/'/>
+            } else {
+              return (<Profile id={id} />)
+            }
+          }
           return (<Profile id={id} />)
         }} />
         <Route path='/login' component={Login} />
@@ -35,8 +43,7 @@ const App = ({ currentUser, loggedIn, getLoggedInUser }) => {
 
 const mapStateToProps = state => {
   return {
-    currentUser: state.authReducer.currentUser,
-    loggedIn: state.authReducer.loggedIn
+    currentUser: state.authReducer.currentUser
   }
 }
 
