@@ -11,14 +11,20 @@
 .input-label {
     font-size: 165%;
     margin-bottom: 10px;
-    width: 80%;
+    width: 50%;
+    text-align: center;
 }
 
 .inputs {
     width: 50%;
-    height: 20%;
+    height: auto;
     font-size: 150%;
     padding-left: 10px;
     border: 1.5px solid black;
     border-radius: 0.75em 0.75em 0.75em 0.75em;
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+.inputs:focus {
+    outline: none
 }

@@ -35,26 +35,35 @@ const Login = ({login, loggedIn}) => {
     return (<Redirect to='/'/>)
   }
   return (
-    <div className='login-wrap'>
-      <h1 className='login-header'>Login Form</h1>
-      <form onSubmit={handleSubmit} className='login-form'>
+    <div className='form-wrap'>
+      <div className='form-header'>
+        <div className='header-red'></div>
+        <div className='header-orange'></div>
+        <div className='header-light-green'></div>
+        <div className='header-dark-green'></div>
+        <div className='header-dark-blue'></div>
+        <div className='header-light-blue'></div>
+        <div className='header-yellow'></div>
+        <div className='header-purple'></div>
+      </div>
+      <form onSubmit={handleSubmit} className='form'>
         <Input
           type='text'
           name='username'
           handleChange={handleInput}
           value={fields.username}
           label='Your Username'
-          placeholder='Enter username'/>
+          placeholder='Enter Username'/>
         <Input
           type='text'
           name='password'
           handleChange={handleInput}
           value={fields.password}
           label='Your Password'
-          placeholder='Enter password'/>
-        <button type='submit'>Submit</button>
+          placeholder='Enter Password'/>
+        <button type='submit' className='submit-btn'>Submit</button>
+      <div className='form-error'>{fields.error}</div>
       </form>
-      <div>{fields.error}</div>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-.login-wrap {
+.form-wrap {
     height: 90%;
     width: 100%;
     margin: 0;
@@ -6,14 +6,83 @@
     text-align: center
 }
 
-.login-form {
+.form {
     height: 100%;
     width: 70%;
     margin: 0 auto;
 }
 
-.login-header {
+.form-header {
     border-bottom: 1.5px solid black;
-    width: 70%;
+    height: 5%;
+    width: 100%;
     margin: 0 auto;
+    font-size: 195%;
+    font-weight: bolder;
 }
+
+.header-red, .header-dark-blue, .header-light-blue, .header-light-green, .header-dark-green, .header-yellow, .header-orange, .header-purple {
+    height: 100%;
+    width: 12.5%;
+    margin: 0;
+    float: left;
+    text-align: center;
+    color: white;
+}
+
+.header-red {
+    background-color: red;
+}
+
+.header-dark-blue {
+    background-color: blue;
+}
+
+.header-light-blue {
+    background-color: #17CCF4;
+}
+
+.header-orange {
+    background-color: orange;
+}
+
+.header-yellow {
+    background-color: yellow;
+}
+
+.header-purple {
+    background-color: purple
+}
+
+.header-light-green {
+    background-color: #0BFE46;
+}
+
+.header-dark-green {
+    background-color: #1E441E;
+}
+
+.submit-btn {
+    width: 30%;
+    margin-top: 15px;
+    font-size: 130%;
+    border-radius: 0.85em 0.85em 0.85em 0.85em;
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+.submit-btn:active, .submit-btn:focus {
+    outline: none;
+}
+
+.submit-btn:hover {
+    color: white;
+    background-color: black
+}
+
+.form-error {
+    color: red;
+    font-size: 145%;
+    display: flex;
+    flex-direction: column
+}
+
