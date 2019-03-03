@@ -1,15 +1,17 @@
-export default ({ dispatch, getState }) => next => action => {
-    const current = next(action)
+export default({getState}) => next => action => {
+  const current = next(action)
 
-    console.log(`THE ACTION: ${current.type}`)
-    console.log(`THE PAYLOAD OF ${current.type} IS: ${current.payload}`)
+  console.log(`THE ACTION: ${current.type}`)
+  console.log(`THE PAYLOAD OF ${current.type} IS: ${current.payload}`)
 
-    const state = getState()
+  const state = getState()
 
-    console.log('#### THE STORE ####')
+  console.log('#### THE STORE ####')
 
-    Object.keys(state).forEach(key => {
-        console.log(`----- ${key.toUpperCase()}`)
-        console.log(state[key])
+  Object
+    .keys(state)
+    .forEach(key => {
+      console.log(`----- ${key.toUpperCase()}`)
+      console.log(state[key])
     })
 }

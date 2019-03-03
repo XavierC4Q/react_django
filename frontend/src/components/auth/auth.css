@@ -1,0 +1,19 @@
+.login-wrap {
+    height: 90%;
+    width: 100%;
+    margin: 0;
+    border-top: 1.5px solid black;
+    text-align: center
+}
+
+.login-form {
+    height: 100%;
+    width: 70%;
+    margin: 0 auto;
+}
+
+.login-header {
+    border-bottom: 1.5px solid black;
+    width: 70%;
+    margin: 0 auto;
+}

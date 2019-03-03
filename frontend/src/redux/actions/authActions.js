@@ -93,7 +93,7 @@ export const EDIT_USER_ACTION = (id, userChanges) => {
                 type: EDIT_USER,
                 payload: {...updatedUser.data, pk: Number(id)}
             })
-        } catch (err) {
+        } catch {
             dispatch(userAuthError('Failed to updated user'))
         }
     }
