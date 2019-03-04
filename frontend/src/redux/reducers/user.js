@@ -1,18 +1,12 @@
-import {GET_PROFILE_USER, POST_MOOD, GET_USER_MOODS, USER_ERROR} from '../types/userTypes';
+import {POST_MOOD, GET_USER_MOODS, USER_ERROR} from '../types/userTypes';
 
 export default(state = {
-  profileUser: null,
   moods: [],
   errors: ''
 }, action) => {
   const {type, payload} = action
 
   switch (type) {
-    case GET_PROFILE_USER:
-      return {
-        ...state,
-        profileUser: payload
-      }
     case GET_USER_MOODS:
       return {
         ...state,

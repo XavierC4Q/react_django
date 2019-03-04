@@ -1,20 +1,9 @@
-import {USER_ERROR, POST_MOOD, GET_USER_MOODS, GET_PROFILE_USER} from '../types/userTypes';
+import {USER_ERROR, POST_MOOD, GET_USER_MOODS} from '../types/userTypes';
 
 import axios from 'axios';
 
 const userError = error => {
   return {type: USER_ERROR, payload: error}
-}
-
-export const GET_PROFILE_USER_ACTION = id => {
-  return async dispatch => {
-    try {
-      const profileUser = await axios.get(`/api/users/${id}`)
-      dispatch({type: GET_PROFILE_USER, payload: profileUser.data})
-    } catch {
-      dispatch(userError('User with that ID not found'))
-    }
-  }
 }
 
 export const GET_ALL_USER_MOODS_ACTION = user_id => {

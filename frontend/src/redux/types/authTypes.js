@@ -1,9 +1,9 @@
-const LOGIN = 'LOGIN'
-const REGISTER = 'REGISTER'
-const LOGOUT = 'LOGOUT'
-const AUTH_ERROR = 'AUTH_ERROR'
-const EDIT_USER = 'EDIT_USER'
-const GET_LOGGED_IN_USER = 'GET_LOGGED_IN_USER'
+const LOGIN = 'LOGIN';
+const REGISTER = 'REGISTER';
+const LOGOUT = 'LOGOUT';
+const AUTH_ERROR = 'AUTH_ERROR';
+const EDIT_USER = 'EDIT_USER';
+const GET_LOGGED_IN_USER = 'GET_LOGGED_IN_USER';
 
 
 export {

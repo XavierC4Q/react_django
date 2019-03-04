@@ -1,7 +1,15 @@
-import React, {useState} from 'react'
-import {Redirect} from 'react-router-dom'
+import React, {useState} from 'react';
+import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
 
-const EditUser = ({id, owner, currentUser, edit}) => {
+import {EDIT_USER_ACTION} from '../../redux/actions/authActions'
+
+const EditUser = ({currentUser, edit}) => {
+
+  if (!currentUser) {
+    return <Redirect to='/'/>
+  }
+
   const initialState = {
     username: '',
     email: '',
@@ -9,13 +17,13 @@ const EditUser = ({id, owner, currentUser, edit}) => {
     state: ''
   }
   const [fields,
-    setField] = useState(initialState)
+    setField] = useState(initialState);
 
   const handleInput = event => {
     setField({
       ...fields,
       [event.target.name]: event.target.value
-    })
+    });
   }
 
   const handleSubmission = event => {
@@ -24,17 +32,16 @@ const EditUser = ({id, owner, currentUser, edit}) => {
       ...fields,
       username: fields.username
         ? fields.username
-        : owner.username,
+        : currentUser.username,
       state: fields.state
         ? fields.state
-        : owner.state
+        : currentUser.state
     }
 
-    edit(id, userChanges)
-    setField(initialState)
+    edit(currentUser.pk, userChanges);
+    setField(initialState);
   }
 
-  if (owner && currentUser) {
     return (
       <div>
         <h1>Edit your Profile</h1>
@@ -63,8 +70,18 @@ const EditUser = ({id, owner, currentUser, edit}) => {
         </form>
       </div>
     )
-  }
-  return <Redirect to='/'/>
 }
 
-export default EditUser;
+const mapStateToProps = state => {
+  return {
+    currentUser: state.authReducer.currentUser
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    edit: (id, userChanges) => dispatch(EDIT_USER_ACTION(id, userChanges))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditUser);

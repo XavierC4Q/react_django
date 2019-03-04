@@ -73,16 +73,16 @@ const Register = ({registerUser, loggedIn}) => {
           label='Confirm Your Password'
           placeholder='Confirm Password'/>
         <button type='submit' className='submit-btn'>Submit</button>
-      <div className='form-error'>
-        {fields.errors.length !== 0 && showErrors(fields.errors)}
-      </div>
+        <div className='form-error'>
+          {fields.errors.length !== 0 && showErrors(fields.errors)}
+        </div>
       </form>
     </div>
   )
 }
 
 const validate = (fields, setField) => {
-  const { username, password, confirmPassword } = fields
+  const {username, password, confirmPassword} = fields
   let errors = []
 
   if (!username) {
@@ -101,12 +101,7 @@ const validate = (fields, setField) => {
     errors.push('Passwords must match')
   }
 
-  setField({
-    username: '',
-    password: '',
-    confirmPassword: '',
-    errors: errors
-  })
+  setField({username: '', password: '', confirmPassword: '', errors: errors})
 }
 
 const mapStateToProps = state => {
