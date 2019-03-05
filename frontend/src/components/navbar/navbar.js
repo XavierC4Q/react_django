@@ -33,7 +33,7 @@ export const Navbar = ({loggedIn, logout}) => {
         {!loggedIn
           ? authLinks()
           : null}
-        {loggedIn && <span className='logout' onClick={logout}>Logout</span>}
+        {loggedIn && <p className='logout' onClick={logout}>Logout</p>}
       </nav>
     </div>
   )

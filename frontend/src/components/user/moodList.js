@@ -21,7 +21,7 @@ const MoodList = ({moods, currentUser, getMoods}) => {
 
   useEffect(() => {
     getMoods(currentUser.pk)
-  }, [moods])
+  }, [])
 
   return (
     <div>
